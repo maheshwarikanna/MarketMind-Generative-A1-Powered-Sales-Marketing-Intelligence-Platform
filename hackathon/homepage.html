@@ -1,148 +1,48 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>MarketMind</title>
-<link rel="stylesheet" href="style.css">
-</head>
+import streamlit as st
+from streamlit.components.v1 import html
+import os
 
-<body>
-    <style>
- body{  
-font-family: Arial;
-margin:0;
-background:#f5f5f5;
-}
+st.set_page_config(page_title="MarketMind", layout="wide")
 
-nav{
-display:flex;
-justify-content:space-between;
-background:#222;
-color:white;
-padding:15px;
-}
+# Function to load HTML files
+def load_html(file_name):
+    if os.path.exists(file_name):
+        with open(file_name, "r", encoding="utf-8") as f:
+            return f.read()
+    else:
+        return f"<h2 style='color:red;'>Error: {file_name} not found</h2>"
 
-nav ul{
-display:flex;
-list-style:none;
-}
+st.title("MarketMind - AI Sales & Marketing Intelligence Platform")
 
-nav ul li{
-margin-left:20px;
-}
+# Navigation menu
+page = st.sidebar.selectbox(
+    "Navigation",
+    [
+        "Home",
+        "Registration",
+        "Login",
+        "Dashboard",
+        "Market Analysis",
+        "AI Content Generator"
+    ]
+)
 
-nav ul li a{
-color:white;
-text-decoration:none;
-}
+# Page routing
 
-.hero{
-text-align:center;
-padding:100px;
-background:#4CAF50;
-color:white;
-}
+if page == "Home":
+    html(load_html("homepage.html"), height=900)
 
-.hero button{
-padding:10px 20px;
-font-size:18px;
-border:none;
-background:white;
-color:#4CAF50;
-cursor:pointer;
-}
+elif page == "Registration":
+    html(load_html("registration.html"), height=900)
 
-.features{
-text-align:center;
-padding:50px;
-}
+elif page == "Login":
+    html(load_html("login.html"), height=900)
 
-.feature-box{
-background:white;
-margin:20px;
-padding:20px;
-display:inline-block;
-width:250px;
-box-shadow:0 0 10px gray;
-}
+elif page == "Dashboard":
+    html(load_html("dashboard.html"), height=900)
 
-.about{
-padding:50px;
-text-align:center;
-background:#eee;
-}
+elif page == "Market Analysis":
+    html(load_html("market_analysis.html"), height=900)
 
-footer{
-background:#222;
-color:white;
-text-align:center;
-padding:20px;
-}
-    </style>
-
-<!-- Navbar -->
-<nav>
-<h2>MarketMind</h2>
-
-<ul>
-<li><a href="#">Home</a></li>
-<li><a href="#">Features</a></li>
-<li><a href="#">About</a></li>
-<li><a href="login.html">Login</a></li>
-<li><a href="register.html">Register</a></li>
-</ul>
-</nav>
-
-<!-- Hero Section -->
-<section class="hero">
-<h1>MarketMind</h1>
-<p>Generative AI Powered Sales & Marketing Intelligence Platform</p>
-
-<a href="registration.html">
-<button>Get Started</button>
-</a>
-</section>
-
-<!-- Features Section -->
-<section class="features">
-
-<h2>Platform Features</h2>
-
-<div class="feature-box">
-<h3>Market Analysis</h3>
-<p>Analyze market trends using AI.</p>
-</div>
-
-<div class="feature-box">
-<h3>Sales Prediction</h3>
-<p>Predict future sales using intelligent algorithms.</p>
-</div>
-
-<div class="feature-box">
-<h3>AI Content Generator</h3>
-<p>Generate marketing content automatically.</p>
-</div>
-
-</section>
-
-<!-- About Section -->
-<section class="about">
-
-<h2>About MarketMind</h2>
-
-<p>
-MarketMind is an AI-powered platform that helps businesses 
-analyze customer behavior, predict sales, and generate 
-marketing strategies using Generative AI.
-</p>
-
-</section>
-
-<!-- Footer -->
-<footer>
-
-<p>© 2026 MarketMind | AI Marketing Intelligence Platform</p>
-
-</footer>
-
-</body>
-</html>
+elif page == "AI Content Generator":
+    html(load_html("ai_generator.html"), height=900)

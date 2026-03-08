@@ -1,28 +1,47 @@
 import streamlit as st
 from streamlit.components.v1 import html
+import os
 
 st.set_page_config(page_title="MarketMind", layout="wide")
 
-# Function to load HTML file
+# Function to load HTML files
 def load_html(file_name):
-    with open(file_name, "r", encoding="utf-8") as f:
-        return f.read()
+    if os.path.exists(file_name):
+        with open(file_name, "r", encoding="utf-8") as f:
+            return f.read()
+    else:
+        return "<h2 style='color:red;'>Error: File not found</h2>"
 
 st.title("MarketMind - AI Sales & Marketing Intelligence Platform")
 
+# Sidebar navigation
 page = st.sidebar.selectbox(
     "Navigation",
-    ["Home", "Login", "Registration", "Dashboard"]
+    [
+        "Home",
+        "Registration",
+        "Login",
+        "Dashboard",
+        "Market Analysis",
+        "AI Content Generator"
+    ]
 )
 
+# Page routing
 if page == "Home":
     html(load_html("homepage.html"), height=900)
-
-elif page == "Login":
-    html(load_html("login.html"), height=900)
 
 elif page == "Registration":
     html(load_html("registration.html"), height=900)
 
+elif page == "Login":
+    html(load_html("login.html"), height=900)
+
 elif page == "Dashboard":
     html(load_html("dashboard.html"), height=900)
+
+elif page == "Market Analysis":
+    html(load_html("market_analysis.html"), height=900)
+
+elif page == "AI Content Generator":
+    html(load_html("ai_generator.html"), height=900)
